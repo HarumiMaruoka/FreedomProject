@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 移動コンポーネント : インポート先でそのゲーム用に編集するとよい
+/// 2D全方向用 : 移動コンポーネント
+/// </summary>
 [RequireComponent(typeof(Rigidbody2D))]
-
-/// <summary> 移動コンポーネント : インポート先でそのゲーム用に編集するとよい </summary>
-public class EveryDirectionMove2D : MonoBehaviour
+public class PlayerMoveController_EveryDirectionMove2D : MonoBehaviour
 {
     //<===== このクラスで使用するコンポーネント =====>//
     Rigidbody2D _rigidbody2D;
