@@ -23,8 +23,8 @@ public class PlayerMoveController_EveryDirectionMove2D : MonoBehaviour
     string _dashButtonName = "";
 
     //<===== このクラスで使用する値 =====>//
-    float _moveSpeedX = 0f;
-    float _moveSpeedY = 0f;
+    float _inputX = 0f;
+    float _inputY = 0f;
     bool _isDash;
 
     void Start()
@@ -48,8 +48,8 @@ public class PlayerMoveController_EveryDirectionMove2D : MonoBehaviour
     /// <summary> 入力 </summary>
     void Input_Move()
     {
-        _moveSpeedX = Input.GetAxisRaw(_horizontalButtonName);
-        _moveSpeedY = Input.GetAxisRaw(_verticalButtonName);
+        _inputX = Input.GetAxisRaw(_horizontalButtonName);
+        _inputY = Input.GetAxisRaw(_verticalButtonName);
         _isDash = Input.GetButton(_dashButtonName);
     }
 
@@ -57,6 +57,6 @@ public class PlayerMoveController_EveryDirectionMove2D : MonoBehaviour
     void Update_Move()
     {
         //速度 = 入力に基づいた方向ベクトル * ダッシュ入力があれば「2」。そうでなければ「1」 
-        _rigidbody2D.velocity = (Vector2.up * _moveSpeedY + Vector2.right * _moveSpeedX).normalized * (_isDash ? 1f : 2f);
+        _rigidbody2D.velocity = (Vector2.up * _inputY + Vector2.right * _inputX).normalized * (_isDash ? 1f : 2f);
     }
 }
