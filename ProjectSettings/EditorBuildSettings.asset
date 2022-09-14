@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Tests/TestJson/TestJson.unity
+    path: Assets/Tests/NormalTest/TestJson/TestJson.unity
     guid: fda6a1256a67a5f4dafadfb9f44063e1
   m_configObjects: {}
