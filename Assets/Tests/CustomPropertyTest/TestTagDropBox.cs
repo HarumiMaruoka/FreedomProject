@@ -1,44 +1,48 @@
 using UnityEngine;
-#if UNITY_EDITOR
 using UnityEditor;
-#endif
 
 /// <summary>
-/// TagNameをインスペクタに描画するためのクラス : 
+/// TagNameをインスペクタに描画するためのクラス : <br/>
+/// 基底クラスに指定したPropertyAttributeクラスとは、
+/// カスタムプロパティー属性を派生させるベースクラス。
+/// これを使用してスクリプト変数のカスタム属性を作成します。
+/// 
+/// カスタム属性は PropertyDrawerクラスと連結して、
+/// その属性を持つスクリプト変数が"インスペクター上で"どう表示されるか制御します。
 /// </summary>
 public class TagNameAttribute : PropertyAttribute { }
 
-#if UNITY_EDITOR
+/// <summary>
+/// CustomPropertyDrawerには属性名を設定する。<br/>
+/// このクラスは、属性を付与した相手に合わせた処理をするクラス。<br/>
+/// </summary>
 [CustomPropertyDrawer(typeof(TagNameAttribute))]
 public class TestTagDropBox : PropertyDrawer
 {
-	// 説明については、リファレンスから流用しつつ記述
-
 	/// <summary>
-	/// このメソッドをオーバーライドしてプロパティーに自身の GUI を作成します。
+	/// インスペクタに表示する処理。<br/>
+	/// 属性に合わせて独自の挙動をするように設定する。<br/>
+	/// 今回は、Tagのドロップボックスを作成する。<br/>
 	/// </summary>
 	/// <param name="position">
-	/// プロパティーの GUI に使用する画面の Rect <br/>
-	/// 描画範囲の矩形 <br/>
+	/// 描画する矩形(今回は使用しない。)
 	/// </param>
 	/// <param name="property">
-	/// 対象となるシリアライズ化されたプロパティー <br/>
-	/// 属性を付与した変数に設定した値が格納されていると思われる。 <br/>
+	/// 属性を付与した相手のプロパティ
 	/// </param>
 	/// <param name="label">
-	/// このプロパティーのラベル <br/>
-	/// 属性を付与した変数に設定した値が格納されていると思われる。 <br/>
+	/// インスペクタに表示するためのいろいろな情報を持っている。
+	/// 多分デフォルトでは変数名を持っている。
 	/// </param>
 	public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
 	{
-		// SerializedPropertyを GUI で管理しやすくするようにするためのプロパティーの
-		// ラッパーである GUI グループを作成します。
+		// SerializedPropertyを GUI で管理しやすくするようにするための
+		// プロパティーラッパーGUI グループを作成します。
+		// プロパティを簡単に追加、変更、再利用するためのもの。
 		EditorGUI.BeginProperty(position, label, property);
-		// string ユーザーによって設定された値。
-		// タグ選択フィールドを作成します。
+		// ユーザーによって設定された値(Tag一覧から設定された値)をプロパティに設定する。
 		property.stringValue = EditorGUI.TagField(position, label, property.stringValue);
 		// BeginProperty と開始した Property Wrapper を終了します。
 		EditorGUI.EndProperty();
 	}
 }
-#endif
