@@ -5,6 +5,7 @@ using UnityEngine;
     #ROOTNAMESPACEBEGIN#
 public class #SCRIPTNAME#
 {
+    #region Singleton
     private static #SCRIPTNAME# _instance = new #SCRIPTNAME#();
     public static #SCRIPTNAME# Instance
     {
@@ -18,6 +19,7 @@ public class #SCRIPTNAME#
         }
     }
     private #SCRIPTNAME#(){}
+    #endregion
 
     #region Member Variables
     #endregion
