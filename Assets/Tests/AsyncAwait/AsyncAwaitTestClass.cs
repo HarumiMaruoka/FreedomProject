@@ -7,6 +7,8 @@ public class AsyncAwaitTestClass
 {
     /// <summary>
     /// 別スレッドで実行するメソッド。
+    /// async 修飾子を使用して、メソッド、ラムダ式、または匿名メソッドが非同期であることを指定します。 
+    /// この修飾子が使用されているメソッドまたは式を、"非同期メソッド" と呼びます。 
     /// </summary>
     /// <returns>
     /// 非同期メソッドには、次の戻り値の型があります。
@@ -15,6 +17,9 @@ public class AsyncAwaitTestClass
     /// </returns>
     public async Task Test()
     {
+        // 非同期メソッドは、最初の await 式に到達するまで同期的に実行されますが、
+        // この時点で、待機していたタスクが完了するまで中断されます。
+        // その間はメソッドの呼び出し元に制御が戻ります。
         var result = await ExampleAsync();
         Debug.Log(result); // 1
     }
