@@ -33,11 +33,11 @@ public class AsyncAwaitTestClass
     /// </returns>
     public async Task<int> ExampleAsync()
     {
-        // 1秒待つ
+        // n秒待つ（指定時間はﾐﾘsecond）
         Debug.Log("始まり");
         await Task.Run(() => Thread.Sleep(5000));
-        // Genericで指定した型の値を返す。
         Debug.Log("終わり");
+        // Genericで指定した型の値を返す。
         return 1;
     }
 }

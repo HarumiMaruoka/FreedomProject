@@ -7,7 +7,8 @@ using UnityEngine;
 /// 2D全方向用 : 移動コンポーネント
 /// </summary>
 [RequireComponent(typeof(Rigidbody2D))]
-public class PlayerMoveController_EveryDirectionMove2D : MonoBehaviour
+public class PlayerMoveController_EveryDirectionMove2D
+    : MonoBehaviour
 {
     //<===== このクラスで使用するコンポーネント =====>//
     Rigidbody2D _rigidbody2D;
