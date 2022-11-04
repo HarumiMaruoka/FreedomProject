@@ -7,6 +7,7 @@ public class TestComponent : MonoBehaviour
     [TagName,SerializeField]
     string tag;
 
+
     [Free,SerializeField]
     int freeInteger;
 

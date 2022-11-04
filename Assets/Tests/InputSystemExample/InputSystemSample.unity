@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 1754561214}
   - component: {fileID: 1754561213}
   - component: {fileID: 1754561217}
+  - component: {fileID: 1754561218}
   m_Layer: 0
   m_Name: Circle
   m_TagString: Untagged
@@ -288,7 +289,19 @@ MonoBehaviour:
     m_ActionId: 09839583-3a1f-47c5-9513-c707096bafa3
     m_ActionName: Player/Look[/Mouse/delta,/Pen/delta]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1754561218}
+        m_TargetAssemblyTypeName: SampleFire, InputSystemExample
+        m_MethodName: OnFire
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 561b8619-51d3-400b-8b2f-0a921f451ffe
     m_ActionName: Player/Fire[/Mouse/leftButton]
   - m_PersistentCalls:
@@ -331,11 +344,63 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: fae196f3-1c50-4fe1-9b01-ba0831ed3663
     m_ActionName: UI/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1754561218}
+        m_TargetAssemblyTypeName: SampleFire, InputSystemExample
+        m_MethodName: OnRightFire
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: dee84d92-534a-45c1-be54-b29a4ad28a18
+    m_ActionName: Player/RightFire
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1754561218}
+        m_TargetAssemblyTypeName: SampleFire, InputSystemExample
+        m_MethodName: OnLeftFire
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: a2653d8f-ad3a-4446-bb8c-c265063628ff
+    m_ActionName: Player/LeftFire
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 3cca4066-646e-4819-aa36-e1f075261d3b
+    m_ActionName: Player/Sample
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6770e9ba-b715-4c48-8165-ccfc68a898c8
+    m_ActionName: Player/ReNameSampleABC
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &1754561218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1754561212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d3aef208920e7c41b24fffc51f5af9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1826743667
 GameObject:
   m_ObjectHideFlags: 0

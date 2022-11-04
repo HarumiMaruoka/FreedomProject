@@ -1,5 +1,5 @@
 {
-    "name": "FreedomProject",
+    "name": "TestInputActions",
     "maps": [
         {
             "name": "Player",
@@ -27,6 +27,42 @@
                     "name": "Fire",
                     "type": "Button",
                     "id": "561b8619-51d3-400b-8b2f-0a921f451ffe",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "RightFire",
+                    "type": "Button",
+                    "id": "dee84d92-534a-45c1-be54-b29a4ad28a18",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "LeftFire",
+                    "type": "Button",
+                    "id": "a2653d8f-ad3a-4446-bb8c-c265063628ff",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Sample",
+                    "type": "Button",
+                    "id": "3cca4066-646e-4819-aa36-e1f075261d3b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ReNameSampleABC",
+                    "type": "Button",
+                    "id": "6770e9ba-b715-4c48-8165-ccfc68a898c8",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -251,6 +287,61 @@
                     "processors": "",
                     "groups": "XR",
                     "action": "Fire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "dee9e9ca-f269-4fc3-8005-162560a7b0eb",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "RightFire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7e86e387-1b59-4d85-b589-b91f9ff8db30",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Sample",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e013925f-4532-463c-9d2e-a93c47ce62ac",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ReNameSampleABC",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "752bec7e-bb26-4f89-945a-7630a363303e",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ReNameSampleABC",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "19f36ecf-da0b-4a49-87de-18186756304e",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "LeftFire",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
