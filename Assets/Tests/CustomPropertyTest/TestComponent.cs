@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class TestComponent : MonoBehaviour
 {
-    [TagName,SerializeField]
-    string tag;
+    //[TagName,SerializeField]
+    //string tag;
 
 
-    [Free,SerializeField]
-    int freeInteger;
+    //[Free,SerializeField]
+    //int freeInteger;
 
-    [SerializeField]
-    int aaa;
+    [AnimationParameter, SerializeField]
+    string bbb;
+
+    //[SerializeField]
+    //int aaa;
 
     void Start()
     {
