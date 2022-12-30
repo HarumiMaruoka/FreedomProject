@@ -12,22 +12,33 @@ public class AnimationParameterPropertyDrawer : PropertyDrawer
 
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
     {
+        bool isSuccessSetUp = default;
         if (_index == -1)
-            SetUp(property);
-
-        int oldIndex = _index;
-        _index = EditorGUI.Popup(position, label, _index, _parameterNames);
-
-        if (oldIndex != _index)
         {
-            property.stringValue = _parameterNames[_index].text;
+            isSuccessSetUp = SetUp(property);
+        }
+        if (isSuccessSetUp)
+        {
+            int oldIndex = _index;
+            _index = EditorGUI.Popup(position, label, _index, _parameterNames);
+
+            if (oldIndex != _index)
+            {
+                property.stringValue = _parameterNames[_index].text;
+            }
+        }
+        else
+        {
+            label.text = "AnimationParameter属性が使用されていますが、AnimatorComponentがアタッチされていません";
+            EditorGUI.LabelField(position, label.text);
         }
     }
 
-    private void SetUp(SerializedProperty property)
+    private bool SetUp(SerializedProperty property)
     {
         // アニメーターを取得
         Animator animator = (property.serializedObject.targetObject as Component).GetComponent<Animator>();
+        if (animator == null) return false; // 取得に失敗したら処理を終了する。
 
         // アニメーションコントローラを取得
         AnimatorController animatorController = animator.runtimeAnimatorController as AnimatorController;
@@ -63,5 +74,7 @@ public class AnimationParameterPropertyDrawer : PropertyDrawer
 
         // プロパティに値を設定する。
         property.stringValue = _parameterNames[_index].text;
+
+        return true;
     }
 }
