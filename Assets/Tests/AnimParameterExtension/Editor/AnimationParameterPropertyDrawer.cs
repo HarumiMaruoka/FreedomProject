@@ -16,10 +16,11 @@ public class AnimationParameterPropertyDrawer : PropertyDrawer
     {
         var oldstrings = _strings;
         _strings = GetElements(property);
-        if (_index == -1 || !_strings.Equals(oldstrings))
+        if (_index == -1 || !_strings.Equals(oldstrings) || !isSuccessSetUp)
         {
             isSuccessSetUp = SetUp(position, property, label);
         }
+        Debug.Log(isSuccessSetUp);
         if (isSuccessSetUp)
         {
             int oldIndex = _index;
@@ -97,14 +98,14 @@ public class AnimationParameterPropertyDrawer : PropertyDrawer
         Animator animator = (property.serializedObject.targetObject as Component).GetComponent<Animator>();
         if (animator == null)
         {
-            return null;
+            return new string[0];
         }
 
         // アニメーションコントローラを取得
         AnimatorController animatorController = animator.runtimeAnimatorController as AnimatorController;
         if (animatorController == null)
         {
-            return null;
+            return new string[0];
         }
 
         // パラメータ名の配列を作成
