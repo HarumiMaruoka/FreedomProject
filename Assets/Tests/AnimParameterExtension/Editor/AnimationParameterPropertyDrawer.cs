@@ -9,13 +9,16 @@ public class AnimationParameterPropertyDrawer : PropertyDrawer
 {
     private int _index = -1;
     private GUIContent[] _parameterNames = default;
+    private bool isSuccessSetUp = default;
+    private string[] _strings;
 
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
     {
-        bool isSuccessSetUp = default;
-        if (_index == -1)
+        var oldstrings = _strings;
+        _strings = GetElements(property);
+        if (_index == -1 || !_strings.Equals(oldstrings))
         {
-            isSuccessSetUp = SetUp(property);
+            isSuccessSetUp = SetUp(position, property, label);
         }
         if (isSuccessSetUp)
         {
@@ -27,24 +30,33 @@ public class AnimationParameterPropertyDrawer : PropertyDrawer
                 property.stringValue = _parameterNames[_index].text;
             }
         }
-        else
-        {
-            label.text = "AnimationParameter属性が使用されていますが、AnimatorComponentがアタッチされていません";
-            EditorGUI.LabelField(position, label.text);
-        }
     }
 
-    private bool SetUp(SerializedProperty property)
+    private bool SetUp(Rect position, SerializedProperty property, GUIContent label)
     {
         // アニメーターを取得
         Animator animator = (property.serializedObject.targetObject as Component).GetComponent<Animator>();
-        if (animator == null) return false; // 取得に失敗したら処理を終了する。
+        if (animator == null)
+        {
+            EditorGUI.LabelField(position, "AnimationParameter属性が使用されていますが、AnimatorComponentがアタッチされていません");
+            return false; // 取得に失敗したら処理を終了する。
+        }
 
         // アニメーションコントローラを取得
         AnimatorController animatorController = animator.runtimeAnimatorController as AnimatorController;
+        if (animatorController == null)
+        {
+            EditorGUI.LabelField(position, "AnimationParameter属性が使用されていますが、AnimatorControllerがアサインされていません。");
+            return false;
+        }
 
         // パラメータ名の配列を作成
         string[] parameterNames = animatorController.parameters.Select(p => p.name).ToArray();
+        if (parameterNames.Length == 0)
+        {
+            EditorGUI.LabelField(position, "AnimationParameter属性が使用されていますが、parameter が一つも設定されていません。");
+            return false;
+        }
 
         // GUIに描画するためのコンテントを作成
         _parameterNames = new GUIContent[parameterNames.Length];
@@ -55,6 +67,7 @@ public class AnimationParameterPropertyDrawer : PropertyDrawer
             _parameterNames[i] = new GUIContent($"{parameterNames[i]}");
         }
 
+        // 再設定用プログラム
         if (!string.IsNullOrEmpty(property.stringValue))
         {
             bool sceneNameFound = false;
@@ -76,5 +89,25 @@ public class AnimationParameterPropertyDrawer : PropertyDrawer
         property.stringValue = _parameterNames[_index].text;
 
         return true;
+    }
+
+    private string[] GetElements(SerializedProperty property)
+    {
+        // アニメーターを取得
+        Animator animator = (property.serializedObject.targetObject as Component).GetComponent<Animator>();
+        if (animator == null)
+        {
+            return null;
+        }
+
+        // アニメーションコントローラを取得
+        AnimatorController animatorController = animator.runtimeAnimatorController as AnimatorController;
+        if (animatorController == null)
+        {
+            return null;
+        }
+
+        // パラメータ名の配列を作成
+        return animatorController.parameters.Select(p => p.name).ToArray();
     }
 }
