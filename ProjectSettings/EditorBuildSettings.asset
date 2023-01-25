@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Tests/NormalTest/TestJson/TestJson.unity
-    guid: fda6a1256a67a5f4dafadfb9f44063e1
+    path: Assets/Tests/AnimationEvent/Sample.unity
+    guid: 9a555a5ece81edf488db61b986021dd0
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 1b125cb5491f1a44d96bc79269c2aca7, type: 2}

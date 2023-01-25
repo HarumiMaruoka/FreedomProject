@@ -4,17 +4,20 @@ using UnityEngine;
 using UnityEditor;
 #endif
 
-public class DebagExtension : EditorWindow
+public class DebagExtension
+#if UNITY_EDITOR
+    : EditorWindow
+#endif
 {
     /// <summary>
     /// この値以上の重要度が設定された値をコンソールに表示する
     /// </summary>
-    private int _importance = 0;
+    private static int _importance = 0;
     /// <summary>
     /// 種類フラグ: このフラグに登録されている値をコンソールに表示する <br/>
     /// 登録や削除などの使い方 : https://programming.pc-note.net/csharp/bit2.html
     /// </summary>
-    private Type _type = Type.None;
+    private static LogType _type = LogType.None;
 
     /// <summary>
     /// 引数をもとにフィルタリングしてログをコンソールに表示する
@@ -22,9 +25,9 @@ public class DebagExtension : EditorWindow
     /// <param name="message"> コンソールに表示する内容 </param>
     /// <param name="importance"> 重要度 </param>
     /// <param name="type"> 種類 </param>
-    public static void DebugLog(string message, int importance, Type type)
+    public static void DebugLog(string message, int importance, LogType type)
     {
-        if (true/*ここに条件文を記述する*/)
+        if (_importance <= importance && _type.HasFlag(type))
         {
             Debug.Log($"重要度 :{importance}, 種類 :{type}\n" + message);
         }
@@ -35,7 +38,7 @@ public class DebagExtension : EditorWindow
     /// <param name="message"> コンソールに表示する内容 </param>
     /// <param name="importance"> 重要度 </param>
     /// <param name="type"> 種類 </param>
-    public static void DebugLogWarning(string message, int importance, Type type)
+    public static void DebugLogWarning(string message, int importance, LogType type)
     {
         if (true/*ここに条件文を記述する*/)
         {
@@ -48,7 +51,7 @@ public class DebagExtension : EditorWindow
     /// <param name="message"> コンソールに表示する内容 </param>
     /// <param name="importance"> 重要度 </param>
     /// <param name="type"> 種類 </param>
-    public static void DebugLogError(string message, int importance, Type type)
+    public static void DebugLogError(string message, int importance, LogType type)
     {
         if (true/*ここに条件文を記述する*/)
         {
@@ -60,7 +63,7 @@ public class DebagExtension : EditorWindow
     /// <summary>
     /// チェックボックス用配列
     /// </summary>
-    private bool[] _flags = new bool[Enum.GetValues(typeof(Type)).Length];
+    private bool[] _flags = new bool[Enum.GetValues(typeof(LogType)).Length];
     /// <summary>
     /// セットアップが完了しているかどうかを表す値
     /// </summary>
@@ -153,7 +156,7 @@ public class DebagExtension : EditorWindow
             else if (i == 1)
             {
                 // Everyの処理 :
-                _flags[i] = _type == Type.Every;
+                _flags[i] = _type == LogType.Every;
             }
             else
             {
@@ -193,7 +196,7 @@ public class DebagExtension : EditorWindow
     {
         // どのFlagとも合致しないとき, trueを返す
         // NoneとEveryの判定は除外する為, 2から開始する
-        for (int i = 2; i < Enum.GetValues(typeof(Type)).Length; i++)
+        for (int i = 2; i < Enum.GetValues(typeof(LogType)).Length; i++)
         {
             if ((_type & IntToType(i)) != 0)
             {
@@ -202,26 +205,26 @@ public class DebagExtension : EditorWindow
         }
         return true;
     }
-    private Type IntToType(int index)
+    private LogType IntToType(int index)
     {
         switch (index)
         {
-            case 0: return Type.None;
-            case 1: return Type.Every;
-            case 2: return Type.Player;
-            case 3: return Type.Enemy;
-            case 4: return Type.Gimmick;
-            case 5: return Type.Other;
+            case 0: return LogType.None;
+            case 1: return LogType.Every;
+            case 2: return LogType.Player;
+            case 3: return LogType.Enemy;
+            case 4: return LogType.Gimmick;
+            case 5: return LogType.Other;
             default:
                 Debug.LogError("不正値が渡されました！");
-                return Type.None;
+                return LogType.None;
         }
     }
 #endif
 }
 
 [Flags]
-public enum Type
+public enum LogType
 {
     None = 0,
     Every = ~0,
